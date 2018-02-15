@@ -20,12 +20,12 @@ result = {
 	'date': 'January 6'
 }
 
-function addProject(result) {
-	var projectHTML = '<a href=#" class="thumbnail">' +
-	'<img src="' + result['image'] + '" class="img">' +
+function callback(result) {
+	var id = result.id;
+	$("#project" + id + " .details").html('<img src="' + result['image'] + '" class="img">' +
     '<p>' + result['title'] + '</p>' +
     '<p><small>' + result['date'] +
-    '</small></p></a>'; 
+    '</small></p></a>';)
 }
 /*
  * Make an AJAX call to retrieve project details and add it in
@@ -40,4 +40,7 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+	var obj;
+	history.pushState(obj, ""+projectID+"", "/project/" + idNumber + "");
+	$.get("/project/" + idNumber + "", callback);
 }
